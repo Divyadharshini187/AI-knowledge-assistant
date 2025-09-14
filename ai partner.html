@@ -1,70 +1,26 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧠 Personal Knowledge Assistant</title>
 
-function App() {
-  const [note, setNote] = useState('');
-  const [query, setQuery] = useState('');
-  const [response, setResponse] = useState('');
-  const [loading, setLoading] = useState(false);
+  <!-- CSS: ai part.css (corrected filename) -->
+  <link rel="stylesheet" href="ai part.css" />
+</head>
+<body>
+  <main id="root" aria-label="Personal Knowledge Assistant"></main>
 
-  const saveNote = async () => {
-    if (!note.trim()) return;
-    await axios.post('/api/save_note', { note });
-    setNote('');
-  };
+  <!-- React + Babel + Axios -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  const askQuery = async () => {
-    if (!query.trim()) return;
-    setLoading(true);
-    const res = await axios.post('/api/query', { query });
-    setResponse(res.data.answer);
-    setLoading(false);
-  };
+  <!-- JavaScript Logic: ai-partn.js -->
+  <script type="text/babel" src="ai partn.js"></script>
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-6 font-sans">
-      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6">
-        <h1 className="text-2xl font-bold mb-4 text-indigo-600">🧠 Personal Knowledge Assistant</h1>
-
-        <textarea
-          className="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          rows="4"
-          placeholder="Write your note here..."
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-        />
-        <button
-          className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 transition"
-          onClick={saveNote}
-        >
-          Save Note
-        </button>
-
-        <hr className="my-6" />
-
-        <input
-          className="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          type="text"
-          placeholder="Ask a question..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button
-          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
-          onClick={askQuery}
-        >
-          {loading ? 'Thinking...' : 'Ask'}
-        </button>
-
-        {response && (
-          <div className="mt-6 bg-gray-50 p-4 rounded border">
-            <h2 className="font-semibold text-gray-700 mb-2">💬 Answer:</h2>
-            <p className="text-gray-800">{response}</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default App;
+  <!-- React Component: partner.jsx -->
+  <script type="text/babel" src="partner.jsx"></script>
+</body>
+</html>
